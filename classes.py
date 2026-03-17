@@ -10,14 +10,16 @@ class Usuario:
         self.senha = senha
         self.biblioteca = []
 
-    def adicionar_jogo(self):
-        self.biblioteca.append(Jogo(input("Digite o nome do jogo: "), input("Digite a descrição do jogo: ")))
+    def adicionar_jogo(self, nome, desc):
+        self.biblioteca.append(Jogo(nome, desc))
 
     def listar_jogos(self):
+        listaJogos = []
         for i in self.biblioteca:
-            print(i.nome)
+            listaJogos.append(i.nome)
+        return listaJogos
 
-    def remover_jogo(self):
+    def remover_jogo(self): # não funciona ainda
         nome = input("digite o nome do jogo que quer remover: ")
         index = False
         for i in range(1, len(self.biblioteca)):
