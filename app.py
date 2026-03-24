@@ -6,10 +6,6 @@ import arquivo
 
 app = Flask("meu site legal")
 
-@app.route("/teste")
-def teste():
-    return arquivo.teste()
-
 @app.route("/jogo/add", methods=["POST"])
 def post_jogo():
     nome = request.json["nome"]
@@ -18,5 +14,4 @@ def post_jogo():
     return arquivo.teste()
 
 app.run()
-
 # curl -X POST http://127.0.0.1:5000/jogo/add -H "Content-Type: application/json" -d "{\"nome\":\"Mario\",\"desc\":\"Odissey\"}"
