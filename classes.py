@@ -21,9 +21,10 @@ class Usuario:
 
     def remover_jogo(self): # não funciona ainda
         nome = input("digite o nome do jogo que quer remover: ")
-        index = False
-        for i in range(1, len(self.biblioteca)):
+        #index = False
+        for i in range(0, len(self.biblioteca)):
             if self.biblioteca[i].nome == nome:
-                index = i
-        if index != False:
-            self.biblioteca[i]        
+                self.biblioteca.pop(i) 
+                #index = i
+        #if index != False:
+           # self.biblioteca[i]        
