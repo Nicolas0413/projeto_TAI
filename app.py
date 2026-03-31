@@ -13,5 +13,10 @@ def post_jogo():
     arquivo.add_jogo(nome, desc)
     return arquivo.teste()
 
+@app.route("/jogo/rmv", methods=["DELETE"])
+def delete_jogo():
+    remover_jogo()
+    return "Pessoa deletada com sucesso", arquivo.teste()
+
 app.run()
 # curl -X POST http://127.0.0.1:5000/jogo/add -H "Content-Type: application/json" -d "{\"nome\":\"Mario\",\"desc\":\"Odissey\"}"
