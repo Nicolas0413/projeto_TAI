@@ -1,5 +1,6 @@
 class Jogo:
-   def __init__(self, nome, desc):
+   def __init__(self, nome, desc, id):
+       self.id = id
        self.nome = nome
        self.desc = desc
 
@@ -20,7 +21,7 @@ class Usuario:
         return listaJogos
 
     def remover_jogo(self): # não funciona ainda
-        nome = input("digite o nome do jogo que quer remover: ")
+        nome = input("digite o id do jogo que quer remover: ")
         #index = False
         for i in range(0, len(self.biblioteca)):
             if self.biblioteca[i].nome == nome:
