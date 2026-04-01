@@ -1,26 +1,17 @@
 from classes import Jogo
 from classes import Usuario
 
-usuario1 = Usuario("Dudu_games", "senhat0p")
+jogos = Jogo
 
+Usuario.adicionar_usuario("Nicolas", "53nh4_1r4d4")
+Usuario.adicionar_usuario("Eduardo", "53nh4_M4n31r4")
 
-usuario1.adicionar_jogo("nome","desc")
-usuario1.adicionar_jogo("nome2","desc2")
-usuario1.adicionar_jogo("nome3","desc3")
+Usuario.listar_usuarios()
 
-print(usuario1.listar_jogos())
+jogos.adicionar_jogo("Silksong", "Explore, fight and survive as you ascend to the peak of a land ruled by silk and song.")
+jogos.adicionar_jogo("PEAK", "PEAK is a co-op climbing game where the slightest mistake can spell your doom.")
 
-usuario1.remover_jogo()
+jogos.listar_jogos()
 
-print(usuario1.listar_jogos())
-
-def add_jogo(nome, desc):
-
-    usuario1.adicionar_jogo(nome,desc)
-
-def teste():
-    
-    return usuario1.listar_jogos()
-
-def rmv_jogo():
-    return usuario1.remover_jogo()
+jogos.remover_jogo("PEAK")
+jogos.listar_jogos()

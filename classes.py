@@ -1,7 +1,9 @@
-class Jogo:
-   def __init__(self, nome, desc):
-       self.nome = nome
-       self.desc = desc
+# =========================
+# CLASSES
+# =========================
+
+usuarios = []
+jogos = []
 
 
 class Usuario:
@@ -10,21 +12,68 @@ class Usuario:
         self.senha = senha
         self.biblioteca = []
 
-    def adicionar_jogo(self, nome, desc):
-        self.biblioteca.append(Jogo(nome, desc))
+    def adicionar_usuario(nome, senha):
 
-    def listar_jogos(self):
-        listaJogos = []
-        for i in self.biblioteca:
-            listaJogos.append(i.nome)
-        return listaJogos
+        for u in usuarios:
+            if u.nome == nome:
+                return("Usuário já existe.")
+                
+            
+        usuarios.append(Usuario(nome, senha))
+        return("Usuário adicionado.")
 
-    def remover_jogo(self): # não funciona ainda
-        nome = input("digite o nome do jogo que quer remover: ")
-        #index = False
-        for i in range(0, len(self.biblioteca)):
-            if self.biblioteca[i].nome == nome:
-                self.biblioteca.pop(i) 
-                #index = i
-        #if index != False:
-           # self.biblioteca[i]        
+    def listar_usuarios():
+
+        if not usuarios:
+            print("Nenhum usuário cadastrado.")
+            return
+
+        for u in usuarios:
+            print(u.nome)
+
+    def remover_usuario(nome):
+
+        for i in range(len(usuarios)):
+            if usuarios[i].nome == nome:
+                usuarios.pop(i)
+                print("Usuário removido.")
+                return
+
+        print("Usuário não encontrado.")
+
+
+class Jogo:
+    def __init__(self, nome, desc):
+        self.nome = nome
+        self.desc = desc
+
+    def adicionar_jogo(nome, desc):
+
+        for j in jogos:
+            if j.nome == nome:
+                return("Jogo já existe.")
+                
+
+        jogos.append(Jogo(nome, desc))
+        return("Jogo adicionado.")
+
+
+    def listar_jogos():
+
+        if not jogos:
+            print("Nenhum jogo cadastrado.")
+            return
+
+        for j in jogos:
+            print(j.nome)
+
+
+    def remover_jogo(nome):
+
+        for i in range(len(jogos)):
+            if jogos[i].nome == nome:
+                jogos.pop(i)
+                print("Jogo removido.")
+                return
+
+        print("Jogo não encontrado.")
