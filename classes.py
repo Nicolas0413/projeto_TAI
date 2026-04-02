@@ -43,9 +43,10 @@ class Usuario:
 
 
 class Jogo:
-    def __init__(self, nome, desc):
+    def __init__(self, nome, desc, id):
         self.nome = nome
         self.desc = desc
+        self.id = id
 
     def adicionar_jogo(nome, desc):
 
@@ -54,8 +55,14 @@ class Jogo:
                 return("Jogo já existe.")
                 
 
-        jogos.append(Jogo(nome, desc))
+        jogos.append(Jogo(nome, desc, len(jogos)))
         return("Jogo adicionado.")
+    
+    def editar_nome(id, nome):
+        for j in jogos:
+            if j.id == id:
+                j.nome = nome
+                return("Nome editado com sucesso.")
 
 
     def listar_jogos():
@@ -68,12 +75,19 @@ class Jogo:
             print(j.nome)
 
 
-    def remover_jogo(nome):
+    def remover_jogo(id):
 
         for i in range(len(jogos)):
-            if jogos[i].nome == nome:
+            if jogos[i].id == id:
                 jogos.pop(i)
                 print("Jogo removido.")
                 return
 
         print("Jogo não encontrado.")
+
+class Review:
+    def __init__(self, id, titulo, nota, texto):
+        self.id = id
+        self.titulo = titulo 
+        self.nota = nota
+        self.texto = texto
