@@ -60,7 +60,9 @@ class Jogo:
         for j in jogos:
             if j.id == id:
                 j.nome = nome
-                return("Nome editado com sucesso.")
+                return "Nome editado com sucesso."
+
+        return "Jogo não encontrado."
     
     def editar_desc(id, desc):
         for j in jogos:

@@ -20,9 +20,10 @@ def post_jogo():
 
     resultado = Jogo.adicionar_jogo(nome, desc)
 
-    return jsonify({
-        "Resultado": resultado
-    })
+    if resultado == "Jogo adicionado.":
+        return jsonify({"msg": resultado}), 201
+
+    return jsonify({"erro": resultado}), 409
 
 @app.route("/usuario/add", methods=["POST"])
 def post_usuario():
@@ -36,9 +37,78 @@ def post_usuario():
 
     resultado = Usuario.adicionar_usuario(nome, senha)
 
+    if resultado == "Usuário adicionado.":
+        return jsonify({"msg": resultado}), 201
+
+    return jsonify({"erro": resultado}), 409
+
+
+@app.route("/jogo/rmv/<int:id>", methods=["DELETE"])
+def delete_jogo(id):
+    resultado = Jogo.remover_jogo(id)
+
+    if resultado == "Jogo removido.":
+        return jsonify({"msg": resultado}), 200;
+
+    return jsonify({"erro": resultado}), 404;
+
+@app.route("/usuario/rmv/<string:nome>", methods=["DELETE"])
+def delete_usuario(nome):
+    resultado = Usuario.remover_usuario(nome)
+
+    if resultado == "Usuário removido.":
+        return jsonify({"msg": resultado}), 200
+
+    return jsonify({"erro": resultado}), 404
+
+@app.route("/jogo/edit/nome/<int:id>", methods=["PUT"])
+def edit_jogo_nome(id):
+    nome = request.json["nome"]
+
+    if not nome:
+        return jsonify({"erro": "Nome obrigatório"}), 400
+
+    resultado = Jogo.editar_nome(id, nome)
+
+    if resultado == "Nome editado com sucesso.":
+        return jsonify({"msg": resultado}), 200
+
+    return jsonify({"erro": resultado}), 404
+
+@app.route("/jogo/edit/desc/<int:id>", methods=["PUT"])
+def edit_jogo_desc(id):
+    desc = request.json["desc"]
+
+    if not desc:
+        return jsonify({"erro": "Descrição obrigatória"}), 400
+
+    resultado = Jogo.editar_desc(id, desc)
+
+    if resultado == "Descrição editada com sucesso!":
+        return jsonify({"msg": resultado}), 200
+
+    return jsonify({"erro": "Jogo não encontrado"}), 404
+
+@app.route("/jogo/get", methods=["GET"])
+def get_jogo():
+
+    jogos = Jogo.listar_jogos()
+
+    if jogos == "Não há jogos.":
+        return "", 204
+
+    return jsonify({"jogos": jogos}), 200
+
+@app.route("/usuario/get", methods=["GET"])
+def get_usuario():
+
     return jsonify({
-        "Resultado": resultado
+        "usuários": Usuario.listar_usuarios()
     })
+
+app.run(debug=True)
+
+
 
 """@app.route("/review/add", methods=["POST"])
 def post_review():
@@ -56,53 +126,3 @@ def post_review():
     return jsonify({
         "Resultado": resultado
     })"""
-
-@app.route("/jogo/rmv/<int:id>", methods=["DELETE"])
-def delete_jogo(id):
-    resultado = Jogo.remover_jogo(id)
-
-    return jsonify({
-        "Resultado": resultado if resultado else "Erro, jogo não foi removido."
-    })
-
-@app.route("/usuario/rmv/<string:nome>", methods=["DELETE"])
-def delete_usuario(nome):
-    resultado = Usuario.remover_usuario(nome)
-
-    return jsonify({
-        "Resultado": resultado if resultado else "Erro, usuario não foi removido."
-    })
-
-@app.route("/jogo/edit/nome/<int:id>", methods=["PUT"])
-def edit_jogo_nome(id):
-    nome = request.json["nome"]
-    resultado = Jogo.editar_nome(id, nome)
-
-    return jsonify({
-        "Resultado": resultado if resultado else "Erro, o nome não foi alterado."
-    })
-
-@app.route("/jogo/edit/desc/<int:id>", methods=["PUT"])
-def edit_jogo_desc(id):
-    desc = request.json["desc"]
-    resultado = Jogo.editar_desc(id, desc)
-
-    return jsonify({
-        "Resultado": resultado if resultado else "erro, a descrição não foi alterada."
-    })
-
-@app.route("/jogo/get", methods=["GET"])
-def get_jogo():
-
-    return jsonify({
-        "jogos": Jogo.listar_jogos()
-    })
-
-@app.route("/usuario/get", methods=["GET"])
-def get_usuario():
-
-    return jsonify({
-        "usuários": Usuario.listar_usuarios()
-    })
-
-app.run(debug=True)
