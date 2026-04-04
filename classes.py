@@ -40,6 +40,28 @@ class Usuario:
 
         return("Usuário não encontrado.")
 
+    def editar_nome_usuario(atual, novo):
+        for u in usuarios:
+            if u.nome == atual:
+                if atual == novo:
+                    return("O nome não pode ser o mesmo.")
+                else:
+                    u.nome = novo
+                    return "Nome editado com sucesso."
+
+        return "Usuário não encontrado."
+
+    def editar_senha(nome, nova):
+        for u in usuarios:
+            if u.nome == nome:
+                if u.senha == nova:
+                    return("A senha não pode ser a mesma.")
+                else:
+                    u.senha = nova
+                    return "Senha editada com sucesso."
+
+        return "Usuário não encontrado."
+
 class Jogo:
     def __init__(self, nome, desc, id):
         self.nome = nome
@@ -56,19 +78,25 @@ class Jogo:
         jogos.append(Jogo(nome, desc, len(jogos)))
         return("Jogo adicionado.")
     
-    def editar_nome(id, nome):
+    def editar_nome_jogo(id, nome):
         for j in jogos:
             if j.id == id:
-                j.nome = nome
-                return "Nome editado com sucesso."
+                if nome == j.nome:
+                    return("O nome não pode ser o mesmo.")
+                else:
+                    j.nome = nome
+                    return "Nome editado com sucesso."
 
         return "Jogo não encontrado."
     
     def editar_desc(id, desc):
         for j in jogos:
             if j.id == id:
-                j.desc = desc
-                return("Descrição editada com sucesso!")
+                if desc == j.desc:
+                    return("A descrição não pode ser a mesma.")
+                else:
+                    j.desc = desc
+                    return("Descrição editada com sucesso!")
 
 
     def listar_jogos():
@@ -91,8 +119,7 @@ class Jogo:
     
 
 class Review:
-    def __init__(self, id, nome_usuario, id_jogo, titulo, nota, texto):
-        self.id = id
+    def __init__(self, nome_usuario, id_jogo, titulo, nota, texto):
         self.nome_usuario = nome_usuario
         self.id_jogo = id_jogo
         self.titulo = titulo 
@@ -103,7 +130,24 @@ class Review:
         if any(r.nome_usuario == nome_usuario and r.id_jogo == id_jogo for r in reviews):
             return "Esse usuário já realizou uma review desse jogo."
         
-        reviews.append(Review(len(reviews), nome_usuario, id_jogo, titulo, nota, texto))
+        user_existe = False
+        jogo_existe = False
+
+        for i in usuarios:
+            if i.nome == nome_usuario:
+                user_existe = True
+        
+        for i in jogos:
+            if i.id == id_jogo:
+                jogo_existe = True
+
+        if not user_existe:
+            return("Esse usuário não existe.")
+        
+        if not jogo_existe:
+            return("Esse jogo não existe.")
+
+        reviews.append(Review(nome_usuario, id_jogo, titulo, nota, texto))
         return("Review adicionada com sucesso")
 
     def listar_reviews():

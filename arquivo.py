@@ -8,7 +8,7 @@ reviews = Review
 
 usuarios.adicionar_usuario("Nicolas", "53nh4_1r4d4")
 usuarios.adicionar_usuario("Eduardo", "53nh4_M4n31r4")
-usuarios.adicionar_usuario("Ignácio", "Melhor professor")
+usuarios.adicionar_usuario("Ignacio", "Melhor professor")
 usuarios.adicionar_usuario("Usuario_Legal", "12456")
 
 jogos.adicionar_jogo("Silksong", "Explore, fight and survive as you ascend to the peak of a land ruled by silk and song.")
