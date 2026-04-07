@@ -8,6 +8,13 @@ from classes import reviews
 
 app = Flask("meu site legal")
 
+@app.after_request
+def add_cors_headers(response):
+    response.headers["Acces-Control-Allow-Origin"] = "*"
+    response.headers["Acces-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+    response.headers["Acces-Control-Allow-Headers"] = "Content-Type"
+    return response
+
 @app.route("/jogo/add", methods=["POST"])
 def post_jogo():
     data = request.json
@@ -185,4 +192,4 @@ def get_review():
         "reviews": Review.listar_reviews()
     }), 200
 
-app.run(debug=True)
+app.run(host="0.0.0.0", port=5000, debug=True)
